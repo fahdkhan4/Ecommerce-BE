@@ -15,10 +15,10 @@ public class JdbcConfig {
     @Bean
     public JdbcTemplate jdbcTemplate(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/ecommerce");
-        dataSource.setPassword("root@123");
-        dataSource.setUsername("root");
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/ecommerce");    // will be same
+        dataSource.setUsername("root");                                // my username of db is root, change it according to yours.
+        dataSource.setPassword("root");                                // my password of db is root, change it according to yours.
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");    // will be same
 
         return new JdbcTemplate(dataSource);
     }

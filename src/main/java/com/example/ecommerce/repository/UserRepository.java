@@ -1,6 +1,7 @@
 package com.example.ecommerce.repository;
 
 import com.example.ecommerce.model.User;
+import com.example.ecommerce.model.helper.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,5 +61,20 @@ public class UserRepository {
             }
             return userList;
         });
+    }
+
+    public boolean authenticateUser(LoginRequest loginRequest){
+        boolean isUserExist =  jdbcTemplate.query("SELECT * FROM users where email='"+loginRequest.getEmail()+"' LIMIT 1 ",rs->{
+            if(
+                    rs.next() &&
+                            (rs.getString("email").equals(loginRequest.getEmail()) &&
+                             rs.getString("password").equals(loginRequest.getPassword()))
+            )
+            {
+                return true;
+            }
+            return false;
+        });
+        return isUserExist;
     }
 }
