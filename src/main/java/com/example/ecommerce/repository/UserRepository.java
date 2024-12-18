@@ -23,13 +23,13 @@ public class UserRepository {
     public User insertUser(User user){
          jdbcTemplate.update(
                  "INSERT INTO " +
-                         "users(firstname,lastname,email,password,contactNumber,dateOfBirth,createdDate,updatedDate,status,profilePic) " +
+                         "user(first_name,last_name,password,contact_no,email,dob,created_at,updated_at,status,profile_pic) " +
                          "VALUES(?,?,?,?,?,?,?,?,?,?)",
                  user.getFirstName(),
                  user.getLastName(),
-                 user.getEmail(),
                  user.getPassword(),
                  user.getContactNumber(),
+                 user.getEmail(),
                  user.getDateOfBirth(),
                  LocalDate.now(),
                  LocalDate.now(),
@@ -37,11 +37,11 @@ public class UserRepository {
                  user.getProfilePic()
          );
 
-         return user;
+         return getUserByEmail(user.getEmail());
     }
 
     public List<User> getAllUsers(){
-        return jdbcTemplate.query("SELECT * FROM users", rs -> {
+        return jdbcTemplate.query("SELECT * FROM user", rs -> {
             List<User> userList = new ArrayList<>();
 
             while(rs.next()){
@@ -60,6 +60,30 @@ public class UserRepository {
                 ));
             }
             return userList;
+        });
+    }
+
+    public User getUserByEmail(String email){
+        String query = "Select * from user where email=?";
+        Object[] arg = {email};
+        return jdbcTemplate.query(query,arg,rs->{
+            User user = null;
+            if(rs.next()) {
+                user = new User(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7) != null ? rs.getDate(7).toLocalDate() : null,
+                        rs.getDate(8).toLocalDate(),
+                        rs.getDate(9).toLocalDate(),
+                        rs.getString(10),
+                        rs.getString(11)
+                );
+            }
+            return user;
         });
     }
 

@@ -6,22 +6,23 @@ public class User {
     private int id;
     private String firstName;
     private String lastName;
-    private String email;
     private String password;
     private String contactNumber;
+
+    private String email;
     private LocalDate dateOfBirth;
     private LocalDate createdDate;
     private LocalDate updatedDate;
     private String status;
     private String profilePic;
 
-    public User(int id, String firstName, String lastName, String email, String password, String contactNumber, LocalDate dateOfBirth, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic) {
+    public User(int id, String firstName, String lastName, String password, String contactNumber, String email, LocalDate dateOfBirth, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.password = password;
         this.contactNumber = contactNumber;
+        this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;

@@ -28,4 +28,17 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+//    @DeleteMapping("/delete")
+//    public void deleteUserById(@PathVariable Integer userId){
+//        if(Objects.isNull(userId)){
+//            System.out.println("Issue while deleting user details user id Cannot be null!");
+//        }
+//
+//        userService.deleteUser();
+//    }
+
+
+
+
+
 }
