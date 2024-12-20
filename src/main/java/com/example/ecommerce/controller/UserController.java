@@ -28,6 +28,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/get/{email}")
+    public User getAllUsers(@PathVariable String email){
+
+        if(email == null){
+            System.out.println("Invalid email cannot be null");
+        }
+
+        return userService.getUserByEmail(email);
+    }
+
 //    @DeleteMapping("/delete")
 //    public void deleteUserById(@PathVariable Integer userId){
 //        if(Objects.isNull(userId)){
