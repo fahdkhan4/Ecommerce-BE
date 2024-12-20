@@ -7,23 +7,23 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private String contactNumber;
+    private String contact_no;
 
     private String email;
-    private LocalDate dateOfBirth;
+    private LocalDate dob;
     private LocalDate createdDate;
     private LocalDate updatedDate;
     private String status;
     private String profilePic;
 
-    public User(int id, String firstName, String lastName, String password, String contactNumber, String email, LocalDate dateOfBirth, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic) {
+    public User(int id, String firstName, String lastName, String password, String contact_no, String email, LocalDate dob, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.contactNumber = contactNumber;
+        this.contact_no = contact_no;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
+        this.dob = dob;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.status = status;
@@ -70,20 +70,20 @@ public class User {
         this.password = password;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getContact_no() {
+        return contact_no;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContact_no(String contact_no) {
+        this.contact_no = contact_no;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public LocalDate getDob() {
+        return dob;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public LocalDate getCreatedDate() {

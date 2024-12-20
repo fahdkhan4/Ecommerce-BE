@@ -3,13 +3,9 @@ package com.example.ecommerce.repository;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.helper.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +24,9 @@ public class UserRepository {
                  user.getFirstName(),
                  user.getLastName(),
                  user.getPassword(),
-                 user.getContactNumber(),
+                 user.getContact_no(),
                  user.getEmail(),
-                 user.getDateOfBirth(),
+                 user.getDob(),
                  LocalDate.now(),
                  LocalDate.now(),
                  user.getStatus(),
@@ -88,7 +84,7 @@ public class UserRepository {
     }
 
     public boolean authenticateUser(LoginRequest loginRequest){
-        boolean isUserExist =  jdbcTemplate.query("SELECT * FROM users where email='"+loginRequest.getEmail()+"' LIMIT 1 ",rs->{
+        boolean isUserExist =  jdbcTemplate.query("SELECT * FROM user where email='"+loginRequest.getEmail()+"' LIMIT 1 ",rs->{
             if(
                     rs.next() &&
                             (rs.getString("email").equals(loginRequest.getEmail()) &&
