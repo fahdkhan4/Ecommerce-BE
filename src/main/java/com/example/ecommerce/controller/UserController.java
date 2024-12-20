@@ -30,11 +30,9 @@ public class UserController {
 
     @GetMapping("/get/{email}")
     public User getAllUsers(@PathVariable String email){
-
         if(email == null){
             System.out.println("Invalid email cannot be null");
         }
-
         return userService.getUserByEmail(email);
     }
 
