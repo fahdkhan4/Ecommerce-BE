@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,7 @@ public class ProductImageController {
         return productImageService.saveProductImage(productImage);
     }
     @GetMapping("/get/{productId}")
-    public List<ProductImageDTO> getProductImageByProductId(@PathVariable int productId) throws FileNotFoundException {
+    public List<ProductImageDTO> getProductImageByProductId(@PathVariable int productId) throws IOException {
         return productImageService.getProductImageByProductId(productId);
     }
 }

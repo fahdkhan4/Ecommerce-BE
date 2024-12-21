@@ -1,6 +1,7 @@
 package com.example.ecommerce;
 
 import com.example.ecommerce.service.CategoryService;
+import com.example.ecommerce.service.RoleService;
 import com.example.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +17,9 @@ public class EcommerceApplication {
 
 		var context = SpringApplication.run(EcommerceApplication.class, args);
 		CategoryService categoryService = context.getBean(CategoryService.class);
+		RoleService roleService = context.getBean(RoleService.class);
 		categoryService.addCategories();
+		roleService.addRoles();
 	}
 
 }
