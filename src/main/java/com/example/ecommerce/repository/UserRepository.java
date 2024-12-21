@@ -2,6 +2,7 @@ package com.example.ecommerce.repository;
 
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.helper.LoginRequest;
+import com.example.ecommerce.model.helper.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public User insertUser(User user){
+    public User insertUser(UserDTO user){
          jdbcTemplate.update(
                  "INSERT INTO " +
                          "user(first_name,last_name,password,contact_no,email,dob,created_at,updated_at,status,profile_pic) " +

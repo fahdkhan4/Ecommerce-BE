@@ -1,6 +1,7 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.model.User;
+import com.example.ecommerce.model.helper.UserDTO;
 import com.example.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public User registerUser(@RequestBody User user){
+    public UserDTO registerUser(@RequestBody UserDTO user){
         if(Objects.isNull(user)){
             System.out.println("Issue while registering user details Cannot be null!");
         }
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{email}")
-    public User getAllUsers(@PathVariable String email){
+    public UserDTO getUserByEmail(@PathVariable String email){
         if(email == null){
             System.out.println("Invalid email cannot be null");
         }

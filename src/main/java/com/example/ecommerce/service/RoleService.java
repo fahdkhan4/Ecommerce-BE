@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleService {
@@ -32,5 +33,22 @@ public class RoleService {
             }
         }
 
+    }
+
+    public void addUserRoles(int userId,List<Role> roles){
+        for(Role role:roles){
+            roleRepository.addUserRole(userId,role.getId());
+        }
+    }
+
+    public List<Role> getUserRoles(int userId){
+        List<Integer> roles = roleRepository.getRolesByUserId(userId);
+        List<Role> userRoles = new ArrayList<>();
+
+        for (Integer role_id:roles){
+            userRoles.add(getAllRoles().stream().filter(el->el.getId() == role_id).findFirst().get());
+        }
+
+        return userRoles;
     }
 }

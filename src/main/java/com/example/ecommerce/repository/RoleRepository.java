@@ -45,7 +45,19 @@ public class RoleRepository {
                 userId,
                 roleId
         );
-
     }
+
+    public List<Integer> getRolesByUserId(int userId){
+        String query = "Select role_id from user_role where user_id=?";
+        Object[] arg = {userId};
+        return jdbcTemplate.query(query,arg,rs->{
+            List<Integer> roleList = new ArrayList<>();
+            while(rs.next()) {
+                roleList.add(rs.getInt(1));
+            }
+            return roleList;
+        });
+    }
+
 
 }

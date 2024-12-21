@@ -2,10 +2,12 @@ package com.example.ecommerce.controller;
 
 
 import com.example.ecommerce.model.Product;
+import com.example.ecommerce.model.helper.ProductDTO;
 import com.example.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,6 +40,14 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
+
+    @GetMapping("/get/user/{user_id}")
+    public List<ProductDTO> getProductsByUserId(@PathVariable int user_id) throws IOException {
+        if(Objects.isNull(user_id)){
+            System.out.println("Product id cannot be null");
+        }
+        return productService.getProductsByUserId(user_id);
+    }
 
 
 
