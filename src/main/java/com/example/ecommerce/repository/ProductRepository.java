@@ -119,4 +119,59 @@ public class ProductRepository {
             return productList;
         });
     }
+
+    public List<Product> searchProductsByCategory(int id) {
+        String query = "SELECT * FROM product where category_id=?";
+        Object[] arg = {id};
+        return jdbcTemplate.query(query,arg, rs -> {
+            List<Product> productList = new ArrayList<>();
+
+            while (rs.next()) {
+                productList.add(new Product(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getDouble(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getDate(8).toLocalDate(),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getInt(11)
+                ));
+            }
+            return productList;
+        });
+    }
+
+    public List<Product> searchProductsByName(String search) {
+        String query = "SELECT * FROM product WHERE name LIKE ?";
+        Object[] arg = { "%" + search + "%" };
+        return jdbcTemplate.query(query,arg, rs -> {
+            List<Product> productList = new ArrayList<>();
+
+            while (rs.next()) {
+                productList.add(new Product(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getDouble(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getDate(8).toLocalDate(),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getInt(11)
+                ));
+            }
+            return productList;
+        });
+    }
+
+    public void updateProductQuantity(Product product) {
+        String sql = "UPDATE Product SET quantity =? where id=?";
+        int rowsUpdated = jdbcTemplate.update(sql,product.getQuantity(),product.getId());
+    }
 }

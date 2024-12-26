@@ -98,4 +98,28 @@ public class UserRepository {
         });
         return isUserExist;
     }
+
+    public User getUserById(int id) {
+        String query = "Select * from user where id=?";
+        Object[] arg = {id};
+        return jdbcTemplate.query(query,arg,rs->{
+            User user = null;
+            if(rs.next()) {
+                user = new User(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7) != null ? rs.getDate(7).toLocalDate() : null,
+                        rs.getDate(8).toLocalDate(),
+                        rs.getDate(9).toLocalDate(),
+                        rs.getString(10),
+                        rs.getString(11)
+                );
+            }
+            return user;
+        });
+    }
 }

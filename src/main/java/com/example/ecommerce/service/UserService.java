@@ -59,5 +59,27 @@ public class UserService {
         return userDTO;
     }
 
+    public UserDTO getUserById(int id){
+        User user =  userRepository.getUserById(id);
+
+        List<Role> roles = roleService.getUserRoles(user.getId());
+
+        UserDTO userDTO = new UserDTO(
+                user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPassword(),
+                user.getContact_no(),
+                user.getEmail(),
+                user.getDob(),
+                user.getCreatedDate(),
+                user.getUpdatedDate(),
+                user.getStatus(),
+                user.getProfilePic(),
+                roles
+        );
+
+        return userDTO;
+    }
 
 }

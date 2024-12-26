@@ -33,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping("/get/{id}")
-    public Product getProductById(@PathVariable int id){
+    public ProductDTO getProductById(@PathVariable int id) throws IOException {
         if(Objects.isNull(id)){
             System.out.println("Product id cannot be null");
         }
@@ -47,6 +47,22 @@ public class ProductController {
             System.out.println("Product id cannot be null");
         }
         return productService.getProductsByUserId(user_id);
+    }
+
+    @GetMapping("/get/category/{category}")
+    public List<ProductDTO> filterProductsByCategory(@PathVariable String category) throws IOException {
+        if(category.isEmpty() || category.isBlank()){
+            throw new IllegalArgumentException("Cannot filter products Category cannot be empty");
+        }
+        return productService.filterProductsByCategory(category);
+    }
+
+    @GetMapping("/get/search/{search}")
+    public List<ProductDTO> searchProducts(@PathVariable String search) throws IOException {
+        if(search.isEmpty() || search.isBlank()){
+            throw new IllegalArgumentException("Cannot filter products Category cannot be empty");
+        }
+        return productService.filterProductsByName(search);
     }
 
 
