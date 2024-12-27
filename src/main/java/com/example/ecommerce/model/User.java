@@ -16,7 +16,9 @@ public class User {
     private String status;
     private String profilePic;
 
-    public User(int id, String firstName, String lastName, String password, String contact_no, String email, LocalDate dob, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic) {
+    private int locationId;
+
+    public User(int id, String firstName, String lastName, String password, String contact_no, String email, LocalDate dob, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic, int locationId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +30,7 @@ public class User {
         this.updatedDate = updatedDate;
         this.status = status;
         this.profilePic = profilePic;
+        this.locationId = locationId;
     }
 
     public int getId() {
@@ -116,5 +119,13 @@ public class User {
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 }

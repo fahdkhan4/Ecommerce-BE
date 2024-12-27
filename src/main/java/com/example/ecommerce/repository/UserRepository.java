@@ -20,8 +20,8 @@ public class UserRepository {
     public User insertUser(UserDTO user){
          jdbcTemplate.update(
                  "INSERT INTO " +
-                         "user(first_name,last_name,password,contact_no,email,dob,created_at,updated_at,status,profile_pic) " +
-                         "VALUES(?,?,?,?,?,?,?,?,?,?)",
+                         "user(first_name,last_name,password,contact_no,email,dob,created_at,updated_at,status,profile_pic,location_id) " +
+                         "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
                  user.getFirstName(),
                  user.getLastName(),
                  user.getPassword(),
@@ -31,7 +31,8 @@ public class UserRepository {
                  LocalDate.now(),
                  LocalDate.now(),
                  user.getStatus(),
-                 user.getProfilePic()
+                 user.getProfilePic(),
+                 user.getLocation().getId()
          );
 
          return getUserByEmail(user.getEmail());
@@ -53,7 +54,8 @@ public class UserRepository {
                         rs.getDate(8).toLocalDate(),
                         rs.getDate(9).toLocalDate(),
                         rs.getString(10),
-                        rs.getString(11)
+                        rs.getString(11),
+                        rs.getInt(12)
                 ));
             }
             return userList;
@@ -77,7 +79,8 @@ public class UserRepository {
                         rs.getDate(8).toLocalDate(),
                         rs.getDate(9).toLocalDate(),
                         rs.getString(10),
-                        rs.getString(11)
+                        rs.getString(11),
+                        rs.getInt(12)
                 );
             }
             return user;
@@ -116,7 +119,8 @@ public class UserRepository {
                         rs.getDate(8).toLocalDate(),
                         rs.getDate(9).toLocalDate(),
                         rs.getString(10),
-                        rs.getString(11)
+                        rs.getString(11),
+                        rs.getInt(12)
                 );
             }
             return user;

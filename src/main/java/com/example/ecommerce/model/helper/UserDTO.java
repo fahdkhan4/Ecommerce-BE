@@ -1,5 +1,6 @@
 package com.example.ecommerce.model.helper;
 
+import com.example.ecommerce.model.Location;
 import com.example.ecommerce.model.Role;
 
 import java.time.LocalDate;
@@ -22,7 +23,9 @@ public class UserDTO {
 
     private List<Role> role;
 
-    public UserDTO(int id, String firstName, String lastName, String password, String contact_no, String email, LocalDate dob, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic, List<Role> role) {
+    private Location location;
+
+    public UserDTO(int id, String firstName, String lastName, String password, String contact_no, String email, LocalDate dob, LocalDate createdDate, LocalDate updatedDate, String status, String profilePic, List<Role> role, Location location) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,6 +38,7 @@ public class UserDTO {
         this.status = status;
         this.profilePic = profilePic;
         this.role = role;
+        this.location = location;
     }
 
     public int getId() {
@@ -131,5 +135,13 @@ public class UserDTO {
 
     public void setRole(List<Role> role) {
         this.role = role;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

@@ -97,7 +97,7 @@ public class OrderService {
         }
 
         String footerDetails =
-                "If you have any questions, feel free to reach out to our customer support team.\n\n" +
+                "\nIf you have any questions, feel free to reach out to our customer support team.\n\n" +
                         "Thank you for choosing us!\n" +
                         "Best regards,\n" +
                         "Mahad, Rafey, Fahd";

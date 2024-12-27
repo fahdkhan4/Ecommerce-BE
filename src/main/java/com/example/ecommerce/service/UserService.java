@@ -1,6 +1,7 @@
 package com.example.ecommerce.service;
 
 import com.example.ecommerce.config.JdbcConfig;
+import com.example.ecommerce.model.Location;
 import com.example.ecommerce.model.Role;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.helper.UserDTO;
@@ -20,13 +21,22 @@ public class UserService {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    LocationService locationService;
+
 
     public UserDTO registerUser(UserDTO userDTO){
+
+        Location location = locationService.addLocation(userDTO.getLocation());
+
+        userDTO.getLocation().setId(location.getId());
+
         User user =  userRepository.insertUser(userDTO);
 
         roleService.addUserRoles(user.getId(),userDTO.getRole());
 
         userDTO.setId(user.getId());
+        userDTO.setLocation(location);
 
         return userDTO;
     }
@@ -40,6 +50,7 @@ public class UserService {
         User user =  userRepository.getUserByEmail(email);
 
         List<Role> roles = roleService.getUserRoles(user.getId());
+        Location location = locationService.getLocationById(user.getLocationId());
 
         UserDTO userDTO = new UserDTO(
                 user.getId(),
@@ -53,7 +64,8 @@ public class UserService {
                 user.getUpdatedDate(),
                 user.getStatus(),
                 user.getProfilePic(),
-                roles
+                roles,
+                location
         );
 
         return userDTO;
@@ -63,6 +75,7 @@ public class UserService {
         User user =  userRepository.getUserById(id);
 
         List<Role> roles = roleService.getUserRoles(user.getId());
+        Location location = locationService.getLocationById(user.getLocationId());
 
         UserDTO userDTO = new UserDTO(
                 user.getId(),
@@ -76,7 +89,8 @@ public class UserService {
                 user.getUpdatedDate(),
                 user.getStatus(),
                 user.getProfilePic(),
-                roles
+                roles,
+                location
         );
 
         return userDTO;
