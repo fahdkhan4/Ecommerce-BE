@@ -31,8 +31,13 @@ public class ProductService {
        return productRepository.addProduct(product);
     }
 
-    public List<Product> getAllProducts(){
-        return productRepository.getAllProduct();
+    public List<ProductDTO> getAllProducts() throws IOException {
+        List<ProductDTO> products =  productToDTO(productRepository.getAllProduct());
+        for (ProductDTO product:products){
+            product.setProductImages(productImageService.getProductImageByProductId(product.getId()));
+        }
+
+        return products;
     }
 
     public ProductDTO getProductById(int id) throws IOException {
@@ -98,7 +103,7 @@ public class ProductService {
 
         }
         else{
-           productDTOS =  productToDTO(getAllProducts());
+           productDTOS =  getAllProducts();
         }
 
         for(ProductDTO product:productDTOS){

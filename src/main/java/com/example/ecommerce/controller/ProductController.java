@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @GetMapping("/get")
-    public List<Product> getAllProducts(){
+    public List<ProductDTO> getAllProducts() throws IOException {
         return productService.getAllProducts();
     }
 
