@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -94,6 +95,38 @@ public class UserService {
         );
 
         return userDTO;
+    }
+
+    public void addLocationInUser(int locationId,int userId){
+        userRepository.addLocationInUser(locationId,userId);
+    }
+
+    public Location updateLocation(Location location,int userId) {
+
+        if (location.getId() == 0) {
+
+            Location addedLocation = locationService.addLocation(location);
+            addLocationInUser(addedLocation.getId(), userId);
+            return addedLocation;
+
+        } else {
+            Location existingLocation = locationService.getLocationById(location.getId());
+
+            if (Objects.isNull(location.getAddress())) {
+                location.setAddress(existingLocation.getAddress());
+            }
+
+            if (Objects.isNull(location.getCity())) {
+                location.setCity(existingLocation.getCity());
+            }
+            if (Objects.isNull(location.getCountry())) {
+                location.setCountry(existingLocation.getCountry());
+            }
+
+            locationService.updateLocation(location);
+
+            return locationService.getLocationById(location.getId());
+        }
     }
 
 }

@@ -126,4 +126,13 @@ public class UserRepository {
             return user;
         });
     }
+
+    public void addLocationInUser(int locationId, int userId) {
+        jdbcTemplate.update(
+                "UPDATE user SET location_id = ? WHERE id = ?",
+                locationId,
+                userId
+        );
+    }
+
 }

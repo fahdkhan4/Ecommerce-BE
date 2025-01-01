@@ -19,7 +19,7 @@ public class LocationRepository {
     public Location addLocation(Location location){
         jdbcTemplate.update(
                 "INSERT INTO location (city,country,address) " +
-                        "VALUES (?,?,?,?,?,?)",
+                        "VALUES (?,?,?)",
                 location.getCity(),
                 location.getCountry(),
                 location.getAddress()
@@ -70,5 +70,16 @@ public class LocationRepository {
             }
             return Optional.empty();
         });
+    }
+
+    public void updateLocation(Location location) {
+        jdbcTemplate.update(
+                "UPDATE location SET city = ?, country = ?, address = ? WHERE id = ?",
+                location.getCity(),
+                location.getCountry(),
+                location.getAddress(),
+                location.getId()
+        );
+
     }
 }
