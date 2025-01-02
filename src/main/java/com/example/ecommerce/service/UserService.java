@@ -28,16 +28,17 @@ public class UserService {
 
     public UserDTO registerUser(UserDTO userDTO){
 
-        Location location = locationService.addLocation(userDTO.getLocation());
-
-        userDTO.getLocation().setId(location.getId());
+        if(Objects.nonNull(userDTO.getLocation())) {
+            Location location = locationService.addLocation(userDTO.getLocation());
+            userDTO.getLocation().setId(location.getId());
+            userDTO.setLocation(location);
+        }
 
         User user =  userRepository.insertUser(userDTO);
 
         roleService.addUserRoles(user.getId(),userDTO.getRole());
 
         userDTO.setId(user.getId());
-        userDTO.setLocation(location);
 
         return userDTO;
     }

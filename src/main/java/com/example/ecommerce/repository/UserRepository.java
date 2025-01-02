@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class UserRepository {
@@ -32,7 +33,7 @@ public class UserRepository {
                  LocalDate.now(),
                  user.getStatus(),
                  user.getProfilePic(),
-                 user.getLocation().getId()
+                 Objects.nonNull(user.getLocation()) ? user.getLocation().getId() : null
          );
 
          return getUserByEmail(user.getEmail());

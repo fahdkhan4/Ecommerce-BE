@@ -108,7 +108,7 @@ public class OrderService {
 
 
         emailService.sendEmail(
-                "FAHAD.G24679@iqra.edu.pk"
+                userDTO.getEmail()
                 ,"Ecommercestore819@gmail.com"
                 ,"Your Order has been Confirmed "+LocalDate.now()
                 ,finalEmailMessage

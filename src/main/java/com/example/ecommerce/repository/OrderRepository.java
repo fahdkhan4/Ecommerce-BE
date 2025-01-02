@@ -19,7 +19,7 @@ public class OrderRepository {
         jdbcTemplate.update(
                 "INSERT INTO `order` (total_amount,payment_id,user_id) VALUES (?,?,?)",
                 orderDTO.getTotalAmount(),
-                null,
+                orderDTO.getPaymentId(),
                 orderDTO.getUserId()
         );
 
