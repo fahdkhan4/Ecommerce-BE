@@ -48,4 +48,10 @@ public class OrderItemRepository {
         });
     }
 
+    public Integer countOrdersByProductId(int id) {
+        String query = "SELECT COUNT(*) FROM order_item WHERE product_id = ?";
+        return jdbcTemplate.queryForObject(query, new Object[] { id }, Integer.class);
+    }
+
+
 }

@@ -27,6 +27,9 @@ public class ProductService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    OrderItemService orderItemService;
+
     public Product addProduct(Product product){
        return productRepository.addProduct(product);
     }
@@ -43,6 +46,8 @@ public class ProductService {
     public ProductDTO getProductById(int id) throws IOException {
         ProductDTO product =  productToProductDTO(productRepository.getProductById(id));
         product.setProductImages(productImageService.getProductImageByProductId(id));
+
+        product.setShowDeleteProductButton(orderItemService.isProductAvailableInOrder(id));
         return product;
     }
 
@@ -79,7 +84,9 @@ public class ProductService {
                 product.getStatus(),
                 product.getUser_id(),
                 product.getCategory_id(),
-                null);
+                null,
+                false)
+        ;
     }
 
     public List<ProductDTO> filterProductsByCategory(String category) throws IOException {
@@ -131,5 +138,9 @@ public class ProductService {
            product.setQuantity(product.getQuantity()-item.getQuantity());
            productRepository.updateProductQuantity(product);
         }
+    }
+
+    public void deleteProductById(int id) {
+        productRepository.deleteProductById(id);
     }
 }

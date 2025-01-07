@@ -174,4 +174,11 @@ public class ProductRepository {
         String sql = "UPDATE Product SET quantity =? where id=?";
         int rowsUpdated = jdbcTemplate.update(sql,product.getQuantity(),product.getId());
     }
+
+    public void deleteProductById(int id) {
+        String sql = "DELETE FROM Product WHERE id = ?";
+        Object[] args = { id };
+        jdbcTemplate.update(sql, args);
+    }
+
 }

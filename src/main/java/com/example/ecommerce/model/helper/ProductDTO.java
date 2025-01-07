@@ -29,6 +29,8 @@ public class ProductDTO {
 
     List<ProductImageDTO> productImages;
 
+    private boolean showDeleteProductButton;
+
     public int getId() {
         return id;
     }
@@ -125,7 +127,7 @@ public class ProductDTO {
         this.productImages = productImages;
     }
 
-    public ProductDTO(int id, String name, Double price, String description, Double weight, String dimension, Integer quantity, LocalDate uploadedDate, String status, int user_id, int category_id, List<ProductImageDTO> productImages) {
+    public ProductDTO(int id, String name, Double price, String description, Double weight, String dimension, Integer quantity, LocalDate uploadedDate, String status, int user_id, int category_id, List<ProductImageDTO> productImages, boolean showDeleteProductButton) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -138,5 +140,14 @@ public class ProductDTO {
         this.user_id = user_id;
         this.category_id = category_id;
         this.productImages = productImages;
+        this.showDeleteProductButton = showDeleteProductButton;
+    }
+
+    public boolean isShowDeleteProductButton() {
+        return showDeleteProductButton;
+    }
+
+    public void setShowDeleteProductButton(boolean showDeleteProductButton) {
+        this.showDeleteProductButton = showDeleteProductButton;
     }
 }

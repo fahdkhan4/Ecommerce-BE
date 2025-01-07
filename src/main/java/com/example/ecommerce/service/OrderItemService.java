@@ -20,4 +20,12 @@ public class OrderItemService {
 
        return orderItemRepository.getOrderItemsByOrderId(items.get(0).getOrderId());
     }
+
+    public boolean isProductAvailableInOrder(int id) {
+        Integer orders = orderItemRepository.countOrdersByProductId(id);
+        if(orders > 0){
+            return false;
+        }
+        return true;
+    }
 }

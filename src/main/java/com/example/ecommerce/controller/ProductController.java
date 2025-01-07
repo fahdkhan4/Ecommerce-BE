@@ -66,5 +66,12 @@ public class ProductController {
     }
 
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteProductByID(@PathVariable int id){
+        if(Objects.isNull(id)){
+            throw new IllegalArgumentException("Cannot delete product");
+        }
+         productService.deleteProductById(id);
+    }
 
 }
